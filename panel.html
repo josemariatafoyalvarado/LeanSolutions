@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Privado - Lean Solutions</title>
+  <style>
+    :root {
+      --azul-oscuro: #1D2A4D;
+      --azul-claro: #6EA8D8;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("textura-fondo.jpg") no-repeat center center fixed; /* CORREGIDO */
+      background-size: cover;
+      color: var(--azul-oscuro);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .panel-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .panel-container h1 { margin-bottom: 15px; }
+    .panel-container p { margin-bottom: 30px; color: #333; }
+
+    .logout-btn {
+      background-color: var(--azul-claro);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .logout-btn:hover { background-color: #4b89b3; }
+  </style>
+</head>
+<body>
+  <div class="panel-container">
+    <h1>Bienvenido al Panel Privado</h1>
+    <p>Este espacio es exclusivo para usuarios registrados de <strong>Lean Solutions</strong>.</p>
+    <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } 
+      from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAAXJ-wklT3mfxdQO16DDwmAriYxroiEKA",
+      authDomain: "cursos-7ae54.firebaseapp.com",
+      projectId: "cursos-7ae54",
+      storageBucket: "cursos-7ae54.firebasestorage.app",
+      messagingSenderId: "356389037138",
+      appId: "1:356389037138:web:bdc9cd1c2a8acfd2bbab8b",
+      measurementId: "G-XV8TV6P3Z1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.href = "index.html";
+    });
+
+    window.logout = function() {
+      signOut(auth).then(() => window.location.href = "index.html");
+    };
+  </script>
+</body>
+</html>
