@@ -1,100 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mis Cursos - Lean Solutions</title>
-  <style>
-    :root { --azul-oscuro: #1D2A4D; --azul-claro: #6EA8D8; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Cursos - Lean Solutions</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url("textura-fondo.jpg") no-repeat center center fixed;
-      background-size: cover;
-      color: var(--azul-oscuro);
-    }
+<style>
+:root {
+    --azul-oscuro: #1D2A4D;
+    --azul-claro: #6EA8D8;
+}
 
-    /* Header */
-    header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: 10px 40px; 
-      background: var(--azul-oscuro); 
-      color: white;
-      border-bottom: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      position: relative;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: linear-gradient(to right, rgba(110,168,216,0.0), var(--azul-claro), rgba(110,168,216,0.0));
-    }
-    header .logo img {
-      height: 50px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 50px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    nav { display: flex; align-items: center; gap: 15px; }
-    nav a { color: white; text-decoration: none; font-weight: bold; }
-    nav button {
-      background-color: var(--azul-claro);
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    nav button:hover { background-color: #4b89b3; }
+/* Layout general */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("textura-fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: var(--azul-oscuro);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-    .courses-container {
-      background: rgba(255,255,255,0.95);
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 900px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+/* Header */
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 40px; 
+    background: var(--azul-oscuro); 
+    color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, rgba(110,168,216,0.0), var(--azul-claro), rgba(110,168,216,0.0));
+}
+header .logo img {
+    height: 50px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+nav { display: flex; align-items: center; gap: 15px; }
+nav a { color: white; text-decoration: none; font-weight: bold; }
+nav button {
+    background-color: var(--azul-claro);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+nav button:hover { background-color: #4b89b3; }
 
-    .course { margin-bottom: 20px; }
-    .course h3 { margin-bottom: 5px; }
-    .progress { background: #ddd; border-radius: 8px; overflow: hidden; margin: 10px 0; }
-    .progress-bar {
-      background: var(--azul-claro);
-      color: white;
-      text-align: center;
-      padding: 5px 0;
-      border-radius: 8px 0 0 8px;
-      font-size: 14px;
-      width: 0%;
-    }
+/* Contenedor de cursos */
+.courses-container {
+    background: rgba(255,255,255,0.95);
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 900px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    flex: 1; /* Para que empuje el footer al fondo */
+}
 
-        display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    
-    main, .courses-container, .panel-container, section {
-      flex: 1; /* Esto hace que el contenido crezca y empuje el footer hacia abajo */
-    }
+/* Cursos individuales */
+.course { 
+    margin-bottom: 20px; 
+    text-align: center; /* Centrar títulos y barras */
+}
+.course h3 { margin-bottom: 5px; }
 
-    footer {
-      margin-top: auto; /* Empuja el footer al fondo */
-    }  
-  </style>
+.progress { 
+    background: #ddd; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    margin: 10px 0; 
+}
+.progress-bar {
+    background: var(--azul-claro);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    width: 0%;
+}
+
+/* Footer */
+footer {
+    background-color: var(--azul-oscuro);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; /* Empuja el footer al fondo */
+}
+</style>
 </head>
 <body>
-  <header>
+
+<header>
     <div class="logo"><a href="index.html"><img src="logo.png" alt="Lean Solutions"></a></div>
     <nav>
       <a href="panel.html">Panel</a>
@@ -102,9 +119,9 @@
       <a href="about.html">Acerca</a>
       <button id="logout-btn">Cerrar sesión</button>
     </nav>
-  </header>
+</header>
 
-  <div class="courses-container">
+<div class="courses-container">
     <h2>Mis Cursos</h2>
 
     <div class="course">
@@ -121,18 +138,19 @@
       <h3>Curso de Gestión de Proyectos</h3>
       <div class="progress"><div class="progress-bar" style="width: 20%;">20%</div></div>
     </div>
-  </div>
+</div>
 
-  <footer>
+<footer>
     <p>Copyright © 2025 Lean Solutions. Todos los derechos reservados.</p>
-  </footer>
+</footer>
 
-  <script>
-    document.getElementById("logout-btn").onclick = () => {
-      // Aquí puedes poner tu lógica de logout de Firebase
-      alert("Sesión cerrada (simulado)");
-      window.location.href = "index.html";
-    }
-  </script>
+<script>
+document.getElementById("logout-btn").onclick = () => {
+    // Aquí puedes poner tu lógica de logout de Firebase
+    alert("Sesión cerrada (simulado)");
+    window.location.href = "index.html";
+};
+</script>
+
 </body>
 </html>
