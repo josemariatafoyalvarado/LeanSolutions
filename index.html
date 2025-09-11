@@ -273,6 +273,16 @@
                 .then(() => { window.location.href = "panel.html"; })
                 .catch(err => { document.getElementById("login-error").innerText = err.message; });
         });
+        // Verificar si ya hay sesión activa
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Si ya hay sesión activa, mandar al panel directamente
+                window.location.href = "panel.html";
+            }
+        });
+
     </script>
 </body>
 </html>
