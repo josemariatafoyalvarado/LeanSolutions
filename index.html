@@ -20,12 +20,11 @@
         body { 
             margin:0; 
             font-family: Arial, sans-serif; 
-            background: url("textura-fondo.jpg") no-repeat center center fixed; 
+            background: url("textura-fondo.jpg") no-repeat center center fixed;
             background-size: cover;
             color: var(--azul-oscuro); 
         }
 
-        /* Header */
         header { 
             display: flex; 
             justify-content: space-between; 
@@ -46,7 +45,6 @@
             height: 6px;
             background: linear-gradient(to right, rgba(110,168,216,0.0), var(--azul-claro), rgba(110,168,216,0.0));
         }
-
         header .logo img {
             height: 50px;
             width: auto;
@@ -56,27 +54,23 @@
             border-radius: 50px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-
-        nav { display: flex; align-items: center; gap: 15px; }
+        nav { display: flex; align-items: center; }
         nav a {
+            margin: 0 20px;
             color: white;
             text-decoration: none;
             font-weight: bold;
         }
-        nav a:hover { color: var(--azul-claro); }
-
-        #login-btn, .auth-btn {
+        #login-btn {
             padding: 8px 16px;
             background-color: var(--azul-claro);
             border: none;
             border-radius: 5px;
             color: white;
-            font-weight: bold;
             cursor: pointer;
+            font-weight: bold;
         }
-        #login-btn:hover, .auth-btn:hover { background-color: #4b89b3; }
 
-        /* Carousel */
         .owl-carousel .item { position: relative; }
         .owl-carousel .item img { 
             width: 100%; 
@@ -97,11 +91,8 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
             padding: 0 20px;
             width: 80%;
-            background: rgba(0,0,0,0.25); /* Sutil sombreado para mejorar legibilidad */
-            border-radius: 10px;
         }
 
-        /* Modal */
         .modal { 
             display: none; 
             position: fixed; 
@@ -157,9 +148,9 @@
 <body>
     <header>
         <div class="logo">
-            <a href="#home"><img src="logo.png" alt="Lean Solutions"></a> 
+            <a href="#home"><img src="logo.png" alt="Lean Solutions"></a>
         </div>
-        <nav id="nav-auth">
+        <nav id="nav-links">
             <a href="#home">Inicio</a>
             <a href="#services">Servicios</a>
             <a href="about.html">Acerca</a>
@@ -244,10 +235,11 @@
         window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
     </script>
 
+    <!-- Firebase y login dinámico sin romper estilos -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } 
-        from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+            from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAAXJ-wklT3mfxdQO16DDwmAriYxroiEKA",
@@ -258,10 +250,29 @@
             appId: "1:356389037138:web:bdc9cd1c2a8acfd2bbab8b",
             measurementId: "G-XV8TV6P3Z1"
         };
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // LOGIN
+        onAuthStateChanged(auth, (user) => {
+            const nav = document.getElementById("nav-links");
+            if(user){
+                // Reemplaza el botón Acceso con Panel + Cerrar sesión
+                const buttonsDiv = document.createElement("div");
+                buttonsDiv.style.display = "flex";
+                buttonsDiv.style.gap = "10px";
+                buttonsDiv.innerHTML = `
+                    <button id="panel-btn">Ir al Panel</button>
+                    <button id="logout-btn">Cerrar sesión</button>
+                `;
+                const loginBtn = document.getElementById("login-btn");
+                nav.replaceChild(buttonsDiv, loginBtn);
+
+                document.getElementById("panel-btn").onclick = () => window.location.href = "panel.html";
+                document.getElementById("logout-btn").onclick = () => signOut(auth).then(() => location.reload());
+            }
+        });
+
         document.getElementById("submit-login").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -270,30 +281,12 @@
                 .catch(err => { document.getElementById("login-error").innerText = err.message; });
         });
 
-        // REGISTRO
         document.getElementById("submit-register").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => { window.location.href = "panel.html"; })
                 .catch(err => { document.getElementById("login-error").innerText = err.message; });
-        });
-
-        // Mostrar botones Panel/Cerrar sesión si ya está logueado
-        const navAuth = document.getElementById("nav-auth");
-        onAuthStateChanged(auth, user => {
-            if(user){
-                navAuth.innerHTML = `
-                    <a href="#home">Inicio</a>
-                    <a href="#services">Servicios</a>
-                    <a href="about.html">Acerca</a>
-                    <a href="#contact">Contacto</a>
-                    <button class="auth-btn" id="panel-btn">Panel</button>
-                    <button class="auth-btn" id="logout-btn">Cerrar sesión</button>
-                `;
-                document.getElementById("panel-btn").onclick = () => window.location.href = "panel.html";
-                document.getElementById("logout-btn").onclick = () => signOut(auth).then(() => location.reload());
-            }
         });
     </script>
 </body>
