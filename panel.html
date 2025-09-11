@@ -108,42 +108,73 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.main-header .logo {
-  height: 40px;
+/* Header */
+header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 40px; 
+    background: var(--azul-oscuro); 
+    color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+}
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, rgba(110,168,216,0.0), var(--azul-claro), rgba(110,168,216,0.0));
 }
 
-.main-header nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
+header .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.main-header nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+nav { display: flex; align-items: center; }
+nav a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
-
-.main-header nav a:hover {
-  color: var(--azul-claro);
+.logout-btn {
+    padding: 8px 16px;
+    background-color: var(--azul-claro);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.logout-btn:hover {
+    background-color: #4b89b3;
 }
 
 
   </style>
 </head>
 <body>
-    <header class="main-header">
-      <img src="logo.png" alt="Lean Solutions" class="logo">
-      <nav>
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Cursos</a></li>
-          <li><a href="#">Soporte</a></li>
-          <li><a href="#">Mi Cuenta</a></li>
-        </ul>
-      </nav>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.png" alt="Lean Solutions"></a>
+        </div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="about.html">Cursos</a>
+            <a href="#">Soporte</a>
+            <a href="#">Mi cuenta</a>
+            <button id="logout-btn" class="logout-btn">Cerrar sesión</button>
+        </nav>
     </header>
   <div class="panel-container">
     <h1>Bienvenido al Panel Privado</h1>
