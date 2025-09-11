@@ -65,15 +65,23 @@ nav button {
 }
 nav button:hover { background-color: #4b89b3; }
 
+/* Main */
+main {
+    flex: 1; /* Para que empuje el footer al fondo */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
 /* Contenedor de cursos */
 .courses-container {
     background: rgba(255,255,255,0.95);
-    margin: 40px auto;
     padding: 30px;
     border-radius: 15px;
     max-width: 900px;
+    width: 100%;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    flex: 1; /* Para que empuje el footer al fondo */
 }
 
 /* Cursos individuales */
@@ -97,6 +105,7 @@ nav button:hover { background-color: #4b89b3; }
     border-radius: 8px 0 0 8px;
     font-size: 14px;
     width: 0%;
+    transition: width 1s ease;
 }
 
 /* Footer */
@@ -106,6 +115,14 @@ footer {
     text-align: center;
     padding: 20px;
     margin-top: auto; /* Empuja el footer al fondo */
+}
+
+/* Botón logout adicional */
+#logout-btn {
+    background-color: var(--azul-claro);
+}
+#logout-btn:hover {
+    background-color: #4b89b3;
 }
 </style>
 </head>
@@ -121,24 +138,26 @@ footer {
     </nav>
 </header>
 
-<div class="courses-container">
-    <h2>Mis Cursos</h2>
+<main>
+    <div class="courses-container">
+        <h2>Mis Cursos</h2>
 
-    <div class="course">
-      <h3>Curso de Lean Management</h3>
-      <div class="progress"><div class="progress-bar" style="width: 70%;">70%</div></div>
-    </div>
+        <div class="course">
+          <h3>Curso de Lean Management</h3>
+          <div class="progress"><div class="progress-bar" style="width: 70%;">70%</div></div>
+        </div>
 
-    <div class="course">
-      <h3>Curso de Mejora Continua</h3>
-      <div class="progress"><div class="progress-bar" style="width: 45%;">45%</div></div>
-    </div>
+        <div class="course">
+          <h3>Curso de Mejora Continua</h3>
+          <div class="progress"><div class="progress-bar" style="width: 45%;">45%</div></div>
+        </div>
 
-    <div class="course">
-      <h3>Curso de Gestión de Proyectos</h3>
-      <div class="progress"><div class="progress-bar" style="width: 20%;">20%</div></div>
+        <div class="course">
+          <h3>Curso de Gestión de Proyectos</h3>
+          <div class="progress"><div class="progress-bar" style="width: 20%;">20%</div></div>
+        </div>
     </div>
-</div>
+</main>
 
 <footer>
     <p>Copyright © 2025 Lean Solutions. Todos los derechos reservados.</p>
