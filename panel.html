@@ -159,6 +159,10 @@ nav a {
 .logout-btn:hover {
     background-color: #4b89b3;
 }
+.logout-container {
+  text-align: center;
+  margin-top: 30px;
+}
 
 
   </style>
@@ -205,14 +209,11 @@ nav a {
   <div class="section-card">
     <h2>Mis Cursos</h2>
     <p>Revisa los cursos que has adquirido y tu progreso.</p>
-    <div class="progress">
-      <div class="progress-bar" style="width: 40%;">40%</div>
-    </div>
-    <button>Ir a Mis Cursos</button>
+    <button onclick="window.location.href='mis-cursos.html'">Ir a Mis Cursos</button>
   </div>
+<div class="logout-container">
+  <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
 </div>
-    <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
-  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
